@@ -1,0 +1,25 @@
+{
+  "name": "shoping-kart",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-handlebars": "^7.0.1",
+    "express-session": "^1.17.3",
+    "hbs": "^4.2.0",
+    "http-errors": "~1.6.3",
+    "mongodb": "^5.1.0",
+    "morgan": "~1.9.1",
+    "nocache": "^3.0.4",
+    "nodemon": "^2.0.21",
+    "objectid": "^3.2.1",
+    "razorpay": "^2.8.6"
+  }
+}

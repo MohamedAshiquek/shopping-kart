@@ -1,0 +1,101 @@
+<section>
+    
+    <div class="condainer">
+        <table class="table mt-2">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">price</th>
+                    <th scope="col">Quandity</th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                  
+                    <td><img style="width: 70px;height: 70px" src="/images/{{this.product._id}}.png">
+                     <td>{{this.product.name}}</td>
+                     <td>{{this.product.price}}</td>
+                
+                     <td> 
+                         <button class="cart-item-count mr-3 btn btn-primary" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+                         <button class="cart-item-count ml-3 btn btn-primary" onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
+                     </td>
+                     <td>
+                     <button class="btn btn-danger" onclick="deleteProduct('{{this._id}}','{{this.product._id}}')">Delete</button>
+                     </td>
+                </tr>
+                {{/each}}
+            </tbody>
+
+        </table>
+        <hr>
+        <div class="float-right mr-5 mt-2">
+     <h3>Total Amount :Rs <span id="totel">{{totelValue}}</span></h3>
+                
+                 <a href="/order-place" class="btn btn-success" style="width: 100%;">Place Order</a>
+
+        </div> 
+
+
+    </div>
+</section>
+<script>
+    function changeQuantity(cartId,proId,count){
+        let quantity=parseInt(document.getElementById(proId).innerHTML) 
+        count=parseInt(count)
+       
+    $.ajax({
+        url:'/change-product-quantity',
+        data:{
+           
+            cart:cartId,
+            product:proId,
+            quantity:quantity,
+            count:count,
+           
+        },
+        method:'post',
+        success:(response)=>{
+            if(response.removeProduct){
+               alert("Product Removed From Cart")
+                location.reload()
+               
+            }else{
+              console.log(response)
+                document.getElementById(proId).innerHTML=quantity+count
+                
+               
+            }
+            
+           
+        }
+        })
+    }
+    
+</script>
+<script>
+function deleteProduct(cartId,proId){
+    
+        $.ajax({
+            url:'/delete-product',
+            data:{
+                cart:cartId,
+                product:proId,
+              
+            },
+            method:'post',
+            success:(response)=>{
+            if(response.removeProduct){
+               alert("Delete Product")
+                location.reload()
+            
+            }
+            }
+        })
+    }
+</script>
