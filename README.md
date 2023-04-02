@@ -1,2 +1,2 @@
-# shopping-kar6
+# shopping-kart
 
